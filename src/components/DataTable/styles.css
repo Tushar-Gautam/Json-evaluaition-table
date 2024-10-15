@@ -57,26 +57,20 @@ tr {
   overflow: hidden;
 }
 
-.name-initials {
+.avatar {
   display: inline-block;
   width: 35px;
   height: 35px;
-  line-height: 35px; /* Vertical centering */
-  border-radius: 50%; /* Makes it a circle */
-  color: white; /* White text color */
+  line-height: 35px;
+  border-radius: 50%;
+  color: white;
   font-weight: bold;
   text-align: center;
   margin-right: 10px;
   font-size: 14px;
-}
-
-.name-initials.even {
   background-color: #5c6bc0;
 }
 
-.name-initials.odd {
-  background-color: #c53532;
-}
 .table-header {
   display: flex;
   align-items: center;

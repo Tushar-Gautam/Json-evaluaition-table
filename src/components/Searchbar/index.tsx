@@ -2,15 +2,7 @@ import { useState, useRef, useEffect, FC } from "react";
 import { Search, FileCheck, FilterIcon } from "lucide-react";
 import "./style.css";
 import { InputField } from "../InputField";
-
-const EVALUATION_STATUSES = [
-  "YET_TO_START",
-  "IN_PROGRESS",
-  "COMPLETED",
-  "EXPIRED",
-] as const;
-
-type EvaluationStatus = (typeof EVALUATION_STATUSES)[number];
+import { EVALUATION_STATUSES, type EvaluationStatus } from "@utils";
 
 interface SearchBarProps {
   searchTerm: string;

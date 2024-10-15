@@ -1,3 +1,5 @@
+import { EVALUATION_STATUSES } from "./constants";
+
 export type TableData = {
   id: number;
   name: string;
@@ -7,3 +9,5 @@ export type TableData = {
   taskStartDate: string;
 };
 export type SortOrder = "asc" | "desc";
+
+export type EvaluationStatus = (typeof EVALUATION_STATUSES)[number];

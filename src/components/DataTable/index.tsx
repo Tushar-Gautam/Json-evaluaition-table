@@ -1,9 +1,9 @@
 import React from "react";
-import { format } from "date-fns";
-import { startCase } from "lodash-es";
 import "./styles.css";
 import { SortOrder, TableData } from "@utils";
-import { ChevronDown, ChevronUp } from "lucide-react";
+
+import { TableCell } from "./TableCell";
+import { TableHeader } from "./TableHeader";
 
 interface DataTableProps {
   sortedData: TableData[];
@@ -18,28 +18,6 @@ export const DataTable: React.FC<DataTableProps> = ({
   sortOrder,
   handleSort,
 }) => {
-  const getHeaderLabel = (key: string) => startCase(key);
-
-  const renderSortIcon = (key: string) => {
-    if (sortColumn !== key) return null;
-    return sortOrder === "asc" ? <ChevronUp /> : <ChevronDown />;
-  };
-
-  const getInitials = (name: string) => {
-    return name
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase())
-      .join("");
-  };
-
-  const formatTaskStartDate = (startDate: number, timeZone: string): string => {
-    return `${format(new Date(startDate), "MMM dd yyyy")} @ ${format(
-      new Date(startDate),
-      "HH:mm"
-    )} (${timeZone})`;
-  };
-
-  // Define headers, including the new "Task Start Date"
   const headers: (keyof TableData)[] = [
     "name",
     "taskStartDate",
@@ -47,55 +25,29 @@ export const DataTable: React.FC<DataTableProps> = ({
   ];
 
   return (
-    <div className="table-container">
-      <table border={1} cellPadding={5} cellSpacing={0}>
-        <thead>
-          <tr>
-            {headers.map((key) => (
-              <th key={key} onClick={() => handleSort(key)}>
-                <span className="heading">
-                  {getHeaderLabel(key)} {renderSortIcon(key)}
-                </span>
-              </th>
+    <table>
+      <thead>
+        <tr>
+          {headers.map((column) => (
+            <TableHeader
+              key={column}
+              column={column}
+              sortColumn={sortColumn}
+              sortOrder={sortOrder}
+              handleSort={handleSort}
+            />
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {sortedData.map((row, index) => (
+          <tr key={index}>
+            {headers.map((column) => (
+              <TableCell key={column} row={row} column={column} />
             ))}
           </tr>
-        </thead>
-        <tbody>
-          {sortedData.map((row, index) => (
-            <tr key={row.id}>
-              {headers.map((key) => (
-                <td key={key}>
-                  {key === "name" ? (
-                    <>
-                      <span
-                        className={`name-initials ${
-                          index % 2 === 0 ? "even" : "odd"
-                        }`}
-                      >
-                        {getInitials(row[key])}
-                      </span>
-                      <span>{row[key]}</span>
-                    </>
-                  ) : key === "taskStartDate" ? (
-                    formatTaskStartDate(row.startDate, row.timeZone)
-                  ) : key === "evaluationStatus" ? (
-                    <span
-                      className={`status-badge ${row[key]
-                        .toString()
-                        .toLowerCase()
-                        .replace(/_/g, "-")}`}
-                    >
-                      {row[key].toString().replace(/_/g, " ")}
-                    </span>
-                  ) : (
-                    row[key] || "N/A"
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </tbody>
+    </table>
   );
 };
