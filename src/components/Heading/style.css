@@ -1,0 +1,14 @@
+.heading-container {
+  color: #001f52;
+  margin-bottom: 12px;
+  & h1 {
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  & h2 {
+    font-weight: 500;
+    font-size: 20px;
+    color: #8095b1;
+  }
+}

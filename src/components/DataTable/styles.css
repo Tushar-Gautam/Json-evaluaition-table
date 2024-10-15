@@ -1,0 +1,84 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f7fafc;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+th:hover {
+  background-color: #e9ecef;
+}
+
+tr {
+  background-color: #ffffff;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.yet-to-start {
+  background-color: #ffeaa7;
+  color: #d35400;
+}
+.status-badge.in-progress {
+  background-color: #81ecec;
+  color: #0984e3;
+}
+.status-badge.completed {
+  background-color: #55efc4;
+  color: #00b894;
+}
+.status-badge.expired {
+  background-color: #fab1a0;
+  color: #d63031;
+}
+
+.table-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.name-initials {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  line-height: 35px; /* Vertical centering */
+  border-radius: 50%; /* Makes it a circle */
+  color: white; /* White text color */
+  font-weight: bold;
+  text-align: center;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.name-initials.even {
+  background-color: #5c6bc0;
+}
+
+.name-initials.odd {
+  background-color: #c53532;
+}
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

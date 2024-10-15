@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "evaluationStatus": "YET_TO_START",
+    "startDate": 1724747880000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "1235"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "evaluationStatus": "IN_PROGRESS",
+    "startDate": 1724747940000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "7123"
+  },
+  {
+    "id": 3,
+    "name": "Bill Gates",
+    "evaluationStatus": "COMPLETED",
+    "startDate": 1724835720000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "223"
+  },
+  {
+    "id": 4,
+    "name": "Abraham Lincoln",
+    "evaluationStatus": "EXPIRED",
+    "startDate": 1724747880000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "323"
+  },
+  {
+    "id": 5,
+    "name": "Steve Jobs",
+    "evaluationStatus": "YET_TO_START",
+    "startDate": 1724747880000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "423"
+  },
+  {
+    "id": 6,
+    "name": "Elon Musk",
+    "evaluationStatus": "COMPLETED",
+    "startDate": 1724747940000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "8823"
+  },
+  {
+    "id": 7,
+    "name": "Joe Biden",
+    "evaluationStatus": "IN_PROGRESS",
+    "startDate": 1724747880000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "3"
+  },
+  {
+    "id": 8,
+    "name": "Kamala Harris",
+    "evaluationStatus": "YET_TO_START",
+    "startDate": 1724747940000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "3"
+  },
+  {
+    "id": 9,
+    "name": "Queen Elizabeth",
+    "evaluationStatus": "EXPIRED",
+    "startDate": 1724835720000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "23"
+  },
+  {
+    "id": 10,
+    "name": "Barack Obama",
+    "evaluationStatus": "IN_PROGRESS",
+    "startDate": 1724747880000,
+    "timeZone": "GMT+5:30 Asia/Kolkata",
+    "test": "1213"
+  }
+]
