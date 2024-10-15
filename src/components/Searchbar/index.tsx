@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, FC } from "react";
 import { Search, FileCheck, FilterIcon } from "lucide-react";
 import "./style.css";
+import { InputField } from "../InputField";
 
 const EVALUATION_STATUSES = [
   "YET_TO_START",
@@ -64,7 +65,7 @@ export const SearchBar: FC<SearchBarProps> = ({
   return (
     <div className="search-filter-container">
       <div className="search-input-container">
-        <input
+        <InputField
           type="text"
           placeholder="Search by Name and Status"
           value={searchTerm}
@@ -92,7 +93,7 @@ export const SearchBar: FC<SearchBarProps> = ({
         {isDropdownOpen && (
           <div className="filter-dropdown">
             <label className="filter-option">
-              <input
+              <InputField
                 type="checkbox"
                 checked={selectedStatuses.length === EVALUATION_STATUSES.length}
                 onChange={handleToggleAll}
@@ -101,7 +102,7 @@ export const SearchBar: FC<SearchBarProps> = ({
             </label>
             {EVALUATION_STATUSES.map((status) => (
               <label key={status} className="filter-option">
-                <input
+                <InputField
                   type="checkbox"
                   checked={selectedStatuses.includes(status)}
                   onChange={() => handleToggleStatus(status)}

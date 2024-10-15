@@ -2,6 +2,7 @@ import "./style.css";
 import { FileUp } from "lucide-react";
 import { FC } from "react";
 import { DropzoneInputProps, DropzoneRootProps } from "react-dropzone";
+import { InputField } from "../InputField";
 
 interface FileUploaderProps {
   getRootProps<T extends DropzoneRootProps>(props?: T): T;
@@ -26,7 +27,7 @@ export const FileUploader: FC<FileUploaderProps> = ({
         {...getRootProps()}
         className={`dropzone ${isDragActive ? "active" : ""}`}
       >
-        <input {...getInputProps()} />
+        <InputField {...getInputProps()} />
         <FileUp
           height={44}
           width={44}
@@ -51,7 +52,7 @@ export const FileUploader: FC<FileUploaderProps> = ({
         <button onClick={handleUploadClick} className="upload-button">
           Choose file from computer
         </button>
-        <input
+        <InputField
           type="file"
           ref={fileInputRef}
           onChange={handleFileInputChange}

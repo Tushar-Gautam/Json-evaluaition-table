@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { startCase } from "lodash-es";
 import "./styles.css";
 import { SortOrder, TableData } from "@utils";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface DataTableProps {
   sortedData: TableData[];
@@ -21,7 +22,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 
   const renderSortIcon = (key: string) => {
     if (sortColumn !== key) return null;
-    return sortOrder === "asc" ? "↑" : "↓";
+    return sortOrder === "asc" ? <ChevronUp /> : <ChevronDown />;
   };
 
   const getInitials = (name: string) => {
@@ -52,7 +53,9 @@ export const DataTable: React.FC<DataTableProps> = ({
           <tr>
             {headers.map((key) => (
               <th key={key} onClick={() => handleSort(key)}>
-                {getHeaderLabel(key)} {renderSortIcon(key)}
+                <span className="heading">
+                  {getHeaderLabel(key)} {renderSortIcon(key)}
+                </span>
               </th>
             ))}
           </tr>
