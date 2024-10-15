@@ -129,4 +129,8 @@ table {
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
