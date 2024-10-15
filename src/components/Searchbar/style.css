@@ -49,12 +49,15 @@
   flex-grow: 1;
 }
 
-.search-icon {
+.icon {
   position: absolute;
   right: 0px;
   top: 50%;
   transform: translateY(-50%);
   color: #888;
+}
+.cancel-icon {
+  cursor: pointer;
 }
 
 .search-input {

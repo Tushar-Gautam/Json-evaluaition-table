@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, FC } from "react";
-import { Search, FileCheck, FilterIcon } from "lucide-react";
+import { Search, FileCheck, FilterIcon, X } from "lucide-react";
 import "./style.css";
 import { InputField } from "../InputField";
 import { EVALUATION_STATUSES, type EvaluationStatus } from "@utils";
@@ -54,6 +54,10 @@ export const SearchBar: FC<SearchBarProps> = ({
     toggleStatus(status);
   };
 
+  const handleCancelSearch = () => {
+    setSearchTerm("");
+  };
+
   return (
     <div className="search-filter-container">
       <div className="search-input-container">
@@ -64,7 +68,15 @@ export const SearchBar: FC<SearchBarProps> = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
-        <Search className="search-icon" size={20} />
+        {searchTerm.length === 0 ? (
+          <Search className="icon" size={20} />
+        ) : (
+          <X
+            className="icon cancel-icon"
+            size={20}
+            onClick={handleCancelSearch}
+          />
+        )}
       </div>
       <div className="filter-container" ref={dropdownRef}>
         <div onClick={() => setIsFilterOpen(!isFilterOpen)}>
