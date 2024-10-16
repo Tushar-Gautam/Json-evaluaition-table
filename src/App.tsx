@@ -4,20 +4,36 @@ import { useDropzone } from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
-import { EVALUATION_STATUSES, type EvaluationStatus, isValidTableData, SortOrder, TableData } from "@utils";
-import { DataTable, FileUploader, Filter, Heading, SearchBar } from "@components";
-
+import {
+  EVALUATION_STATUSES,
+  type EvaluationStatus,
+  isValidTableData,
+  SortOrder,
+  TableData,
+} from "@utils";
+import {
+  DataTable,
+  FileUploader,
+  Filter,
+  Heading,
+  SearchBar,
+  LoadingSpinner,
+} from "@components";
 
 const JsonTable: React.FC = () => {
   const [data, setData] = useState<TableData[]>([]);
   const [sortColumn, setSortColumn] = useState<keyof TableData>("id");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedStatuses, setSelectedStatuses] = useState<EvaluationStatus[]>([...EVALUATION_STATUSES]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedStatuses, setSelectedStatuses] = useState<EvaluationStatus[]>([
+    ...EVALUATION_STATUSES,
+  ]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File) => {
     setData([]);
+    setIsLoading(true);
     if (file && file.type === "application/json") {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -41,11 +57,14 @@ const JsonTable: React.FC = () => {
         } catch (error) {
           toast.error("Parsing error. Please try again");
           console.error(error);
+        } finally {
+          setIsLoading(false);
         }
       };
       reader.readAsText(file);
     } else {
       toast.error("Invalid File, Please upload a valid JSON file");
+      setIsLoading(false);
     }
   };
 
@@ -110,10 +129,7 @@ const JsonTable: React.FC = () => {
 
   return (
     <>
-      <ToastContainer
-        autoClose={3000}
-        closeOnClick
-      />
+      <ToastContainer autoClose={3000} closeOnClick />
       <div className="container">
         <Heading />
         <FileUploader
@@ -124,26 +140,32 @@ const JsonTable: React.FC = () => {
           handleUploadClick={handleUploadClick}
           fileInputRef={fileInputRef}
         />
-        {data.length > 0 ? (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
           <>
-          <div className="search-filter-container">
-            <SearchBar
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              />
-            <Filter
-              selectedStatuses={selectedStatuses}
-              toggleStatus={toggleStatus}
-              />
-          </div>
-            <DataTable
-              sortedData={sortedData}
-              sortColumn={sortColumn}
-              sortOrder={sortOrder}
-              handleSort={handleSort}
-            />
+            {data.length > 0 ? (
+              <>
+                <div className="search-filter-container">
+                  <SearchBar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                  />
+                  <Filter
+                    selectedStatuses={selectedStatuses}
+                    toggleStatus={toggleStatus}
+                  />
+                </div>
+                <DataTable
+                  sortedData={sortedData}
+                  sortColumn={sortColumn}
+                  sortOrder={sortOrder}
+                  handleSort={handleSort}
+                />
+              </>
+            ) : null}
           </>
-        ):null}
+        )}
       </div>
     </>
   );
