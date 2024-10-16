@@ -5,7 +5,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
 import { isValidTableData, SortOrder, TableData } from "@utils";
-import { DataTable, FileUploader, Heading, SearchBar } from "@components";
+import { DataTable, FileUploader, Filter, Heading, SearchBar } from "@components";
+
 
 const JsonTable: React.FC = () => {
   const [data, setData] = useState<TableData[]>([]);
@@ -123,14 +124,18 @@ const JsonTable: React.FC = () => {
           handleUploadClick={handleUploadClick}
           fileInputRef={fileInputRef}
         />
-        {data.length > 0 && (
+        {data.length > 0 ? (
           <>
+          <div className="search-filter-container">
             <SearchBar
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
+              />
+            <Filter
               selectedStatuses={selectedStatuses}
               toggleStatus={toggleStatus}
-            />
+              />
+          </div>
             <DataTable
               sortedData={sortedData}
               sortColumn={sortColumn}
@@ -138,7 +143,7 @@ const JsonTable: React.FC = () => {
               handleSort={handleSort}
             />
           </>
-        )}
+        ):null}
       </div>
     </>
   );
