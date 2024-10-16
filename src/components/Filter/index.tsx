@@ -2,7 +2,7 @@ import "./style.css";
 import { EVALUATION_STATUSES, type EvaluationStatus } from "@utils";
 import { FC, useEffect, useRef, useState } from "react";
 import { FileCheck, FilterIcon } from "lucide-react";
-import { InputField } from "../InputField";
+import { Dropdown } from "../Dropdown";
 
 interface FilterProps {
   selectedStatuses: string[];
@@ -46,12 +46,13 @@ export const Filter: FC<FilterProps> = ({ selectedStatuses, toggleStatus }) => {
   const handleToggleStatus = (status: EvaluationStatus) => {
     toggleStatus(status);
   };
+
   return (
     <div className="filter-container" ref={dropdownRef}>
       <div onClick={() => setIsFilterOpen(!isFilterOpen)}>
         <FilterIcon color="#4E6187" />
       </div>
-      {isFilterOpen && (
+      {isFilterOpen ? (
         <div className="filters">
           <span className="filter-heading">Evaluation Status</span>
           <div
@@ -62,29 +63,14 @@ export const Filter: FC<FilterProps> = ({ selectedStatuses, toggleStatus }) => {
             <span>Current Evaluation Status</span>
           </div>
         </div>
-      )}
-      {isDropdownOpen && (
-        <div className="filter-dropdown">
-          <label className="filter-option">
-            <InputField
-              type="checkbox"
-              checked={selectedStatuses.length === EVALUATION_STATUSES.length}
-              onChange={handleToggleAll}
-            />
-            All
-          </label>
-          {EVALUATION_STATUSES.map((status) => (
-            <label key={status} className="filter-option">
-              <InputField
-                type="checkbox"
-                checked={selectedStatuses.includes(status)}
-                onChange={() => handleToggleStatus(status)}
-              />
-              {status.replace(/_/g, " ")}
-            </label>
-          ))}
-        </div>
-      )}
+      ) : null}
+      {isDropdownOpen ? (
+        <Dropdown
+          handleToggleStatus={handleToggleStatus}
+          handleToggleAll={handleToggleAll}
+          selectedStatuses={selectedStatuses}
+        />
+      ) : null}
     </div>
   );
 };
