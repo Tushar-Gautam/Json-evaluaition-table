@@ -109,7 +109,7 @@ export const Filter: FC<FilterProps> = ({ selectedStatuses, toggleStatus }) => {
       <div onClick={() => setIsFilterOpen(!isFilterOpen)}>
         <FilterIcon color="#4E6187" />
       </div>
-      {isFilterOpen && (
+      {isFilterOpen ? (
         <div className="filters">
           <span className="filter-heading">Evaluation Status</span>
           <div
@@ -121,8 +121,8 @@ export const Filter: FC<FilterProps> = ({ selectedStatuses, toggleStatus }) => {
             <span>Current Evaluation Status</span>
           </div>
         </div>
-      )}
-      {isDropdownOpen && (
+      ) : null}
+      {isDropdownOpen ? (
         <div
           ref={refs.setFloating}
           style={{
@@ -138,7 +138,7 @@ export const Filter: FC<FilterProps> = ({ selectedStatuses, toggleStatus }) => {
             selectedStatuses={selectedStatuses}
           />
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
