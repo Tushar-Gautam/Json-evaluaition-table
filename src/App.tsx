@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
-import { isValidTableData, SortOrder, TableData } from "@utils";
+import { EVALUATION_STATUSES, type EvaluationStatus, isValidTableData, SortOrder, TableData } from "@utils";
 import { DataTable, FileUploader, Filter, Heading, SearchBar } from "@components";
 
 
@@ -13,7 +13,7 @@ const JsonTable: React.FC = () => {
   const [sortColumn, setSortColumn] = useState<keyof TableData>("id");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<EvaluationStatus[]>([...EVALUATION_STATUSES]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = (file: File) => {
@@ -82,7 +82,7 @@ const JsonTable: React.FC = () => {
     }
   };
 
-  const toggleStatus = (status: string) => {
+  const toggleStatus = (status: EvaluationStatus) => {
     setSelectedStatuses((prev) =>
       prev.includes(status)
         ? prev.filter((s) => s !== status)
